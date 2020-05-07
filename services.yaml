@@ -1,0 +1,10 @@
+services:
+  Doctrine\DBAL\Connection:
+    class: Doctrine\DBAL\Connection
+    factory: ['Makaira\ConnectCompat\ContainerCompat', 'getConnection']
+    public: true
+
+  Symfony\Component\EventDispatcher\EventDispatcherInterface:
+    class: Symfony\Component\EventDispatcher\ContainerAwareEventDispatcher
+    public: true
+    arguments: ['@container']
