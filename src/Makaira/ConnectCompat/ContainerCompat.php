@@ -44,6 +44,7 @@ class ContainerCompat
             $filename = $config->sCompileDir . '/MarmaladeConnectCompatServiceContainer.php';
             if (!file_exists($filename) ) {
                 $container = new ContainerBuilder();
+                $container->register('container', 'Symfony\Component\DependencyInjection\Container'); // dummy service, will be overwritten at the end with $container
 
                 $yamlFileLoader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../../..'));
                 $yamlFileLoader->load('services.yaml');
@@ -78,7 +79,7 @@ class ContainerCompat
             include_once $filename;
             $container = new ProjectServiceContainer();
 
-            $container->set(EventDispatcherInterface::class, new ContainerAwareEventDispatcher($container));
+            $container->set('container', $container);
         }
 
         return $container;
