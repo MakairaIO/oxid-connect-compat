@@ -1,0 +1,45 @@
+#!/usr/bin/env php
+<?php
+
+// use OxidEsales\EshopCommunity\Internal\Framework\Console\Executor;
+use OxidEsales\Facts\Facts;
+use Symfony\Component\Console\Input\ArgvInput;
+// use Webmozart\PathUtil\Path;
+
+$rootPathExist = false;
+$rootPaths = [
+    __DIR__ . '/../',
+    __DIR__ . '/../../',
+    __DIR__ . '/../../../',
+    __DIR__ . '/../../../../',
+];
+foreach ($rootPaths as $rootPath) {
+    if (file_exists($rootPath . 'vendor/autoload.php')) {
+        require_once $rootPath . 'vendor/autoload.php';
+        $rootPathExist = true;
+        break;
+    }
+}
+
+if (!$rootPathExist) {
+    exit("autoload.php file was not found!");
+}
+
+if (file_exists($rootPath . 'web/bootstrap.php')) {
+    require_once $rootPath . 'web/bootstrap.php';
+} elseif (file_exists($rootPath . 'source/bootstrap.php')) {
+    require_once $rootPath . 'source/bootstrap.php';
+} else {
+    exit("bootstrap.php not found.");
+}
+
+$shopId = (int) (new ArgvInput())->getParameterOption('--shop-id', 0);
+if ($shopId !== 0) {
+    $_POST['shp'] = $shopId;
+}
+
+$container = \Makaira\Connect\Connect::getContainerFactory()->getContainer();
+$application = new \Symfony\Component\Console\Application();
+$application->add($container->get('Makaira\Connect\Command\TouchAllCommand'));
+$application->add($container->get('Makaira\Connect\Command\CleanupCommand'));
+$application->run();
