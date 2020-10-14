@@ -1,5 +1,5 @@
 {
-    "name": "makaira/connect-oxid-compat",
+    "name": "makaira/oxid-connect-compat",
     "description": "Make makaira/connect compatible with oxid < 6.2",
     "type": "library",
     "require": {
