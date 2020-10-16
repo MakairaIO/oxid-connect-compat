@@ -21,13 +21,13 @@ class Composer
                 }
             }
 
-            if ($package->getName() === 'makaira/connect') {
+            if ($package->getName() === 'makaira/oxid-connect') {
                 $installationManager = $event->getComposer()->getInstallationManager();
                 $connectDir = $installationManager->getInstallPath($package);
             }
         }
 
-        if (!$foundOxid6) {
+        if (!$foundOxid6 && null !== $connectDir) {
             $root = __DIR__ . '/../../../../../../';
             $modules = null;
             foreach (['modules', 'web/modules', 'source/modules'] as $part) {
@@ -50,6 +50,11 @@ class Composer
                 'override' => true,
                 'delete' => true
             ]);
+
+            $vendorFile = realpath($modules) . '/makaira/vendormetadata.php';
+            if (!$fs->exists($vendorFile)) {
+                $fs->touch($vendorFile);
+            }
         }
     }
 }
