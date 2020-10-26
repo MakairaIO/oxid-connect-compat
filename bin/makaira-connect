@@ -2,7 +2,7 @@
 <?php
 
 // use OxidEsales\EshopCommunity\Internal\Framework\Console\Executor;
-use OxidEsales\Facts\Facts;
+// use OxidEsales\Facts\Facts;
 use Symfony\Component\Console\Input\ArgvInput;
 // use Webmozart\PathUtil\Path;
 

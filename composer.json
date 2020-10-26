@@ -23,8 +23,14 @@
     },
     "authors": [
         {
-            "name": "Martin Schnabel",
-            "email": "ms@marmalade.group"
+            "name": "Martin Schnabel"
+        }, {
+            "name": "Michael Wille",
+            "email": "mw@marmalade.group"
+        }, {
+            "name": "Stefan Krenz",
+            "email": "sk@marmalade.group"
         }
-    ]
+    ],
+    "bin": ["bin/makaira-connect"]
 }
