@@ -70,6 +70,8 @@ class ContainerCompat
 
                 $container->addCompilerPass(new RegisterListenersPass(EventDispatcherInterface::class));
 
+                $container->addCompilerPass(new ConsoleCommandsPass());
+
                 $container->compile();
 
                 $dumper = new PhpDumper($container);

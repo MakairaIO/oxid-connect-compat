@@ -8,3 +8,7 @@ services:
     class: Symfony\Component\EventDispatcher\ContainerAwareEventDispatcher
     public: true
     arguments: ['@container']
+
+  makaira.console.application:
+    class: Symfony\Component\Console\Application
+    public: true

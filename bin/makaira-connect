@@ -39,8 +39,5 @@ if ($shopId !== 0) {
 }
 
 $container = \Makaira\Connect\Connect::getContainerFactory()->getContainer();
-$application = new \Symfony\Component\Console\Application();
-$application->add($container->get('Makaira\Connect\Command\TouchAllCommand'));
-$application->add($container->get('Makaira\Connect\Command\CleanupCommand'));
-$application->add($container->get('Makaira\Connect\Command\DebugChangeCommand'));
+$application = $container->get('makaira.console.application');
 $application->run();
